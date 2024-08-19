@@ -2,12 +2,13 @@
 import { v4 as uuidv4 } from 'uuid';
 import axios, { AxiosResponse } from 'axios';
 import { FetchMovieDetails } from './type/fetch-movie-details.type';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Movie } from './entities/movie.entity'; 
+import { isUUID } from 'class-validator';
 
 @Injectable()
 export class MovieService {
@@ -95,12 +96,13 @@ export class MovieService {
     return updatedMovie;
   }
   async deleteMovieById(id: string): Promise<void> {
+    if (!isUUID(id)) {
+      throw new BadRequestException('Invalid UUID format');
+    }
+
     const result = await this.movieModel.deleteOne({ _id: id }).exec();
-    console.log("result üst",result)
     if (result.deletedCount === 0) {
       throw new NotFoundException('Movie not found');
     }
-    console.log("result alt",result)
-
   }
 }

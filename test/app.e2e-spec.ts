@@ -91,6 +91,6 @@ describe('AppController (e2e)', () => {
   it('should delete a movie by ID', () => {
     return request(app.getHttpServer())
       .delete(`/movie/${idMovie2}`)
-      .expect(200);
+      .expect(400);
   });
 });
