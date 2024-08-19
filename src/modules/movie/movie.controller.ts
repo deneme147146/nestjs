@@ -10,13 +10,21 @@ import {
 import { MovieService } from './movie.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
-import { Movie } from './entities/movie.entity'; // Import the Movie type
+import { Movie } from './entities/movie.entity'; 
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('movie')
 @ApiTags('movies')
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
+
+
+
+  @Post('create')
+  @ApiOperation({ summary: 'Create a new movie' })
+  async createMovie(@Body() createMovieDto: CreateMovieDto): Promise<Movie> {
+    return this.movieService.createMovie(createMovieDto);
+  }
 
   @Post()
   @ApiOperation({ summary: 'Fetch and save movies from external API' })
@@ -35,6 +43,16 @@ export class MovieController {
   async getAllMovies(): Promise<Movie[]> {
     return this.movieService.getAllMovies();
   }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update a movie by ID' })
+  async updateMovie(
+    @Param('id') id: string, 
+    @Body() updateMovieDto: UpdateMovieDto
+  ): Promise<Movie> {
+    return this.movieService.updateMovie(id, updateMovieDto);
+  }
+
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a movie by ID' })
