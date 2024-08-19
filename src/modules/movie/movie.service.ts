@@ -96,8 +96,11 @@ export class MovieService {
   }
   async deleteMovieById(id: string): Promise<void> {
     const result = await this.movieModel.deleteOne({ _id: id }).exec();
+    console.log("result üst",result)
     if (result.deletedCount === 0) {
       throw new NotFoundException('Movie not found');
     }
+    console.log("result alt",result)
+
   }
 }

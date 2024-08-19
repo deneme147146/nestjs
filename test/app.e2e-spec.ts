@@ -8,6 +8,7 @@ describe('AppController (e2e)', () => {
   let app: INestApplication;
   const idMovie ="66a93bd129fb2097591f0079"
   const idMovie2 ="66a93bd129gs2097591f0089"
+  const movieId = "66a93bd029fb2097591f006e"
   const newMovie = {
   "name": "Deadpool & Wolverine",
   "overview": "A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine.",
@@ -54,7 +55,7 @@ describe('AppController (e2e)', () => {
 
   it('/ (GET)', () => {
     return request(app.getHttpServer())
-      .get(`/movie/${idMovie}`)
+      .get(`/movie/${movieId}`)
       .expect(200)
   });
   it('/ (GET)', () => {
@@ -77,7 +78,7 @@ describe('AppController (e2e)', () => {
   it('should fetch and save movies from external API', () => {
     return request(app.getHttpServer())
       .post('/movie')
-      .expect(200);
+      .expect(201);
   });
   it('should update a movie by ID', () => {
     return request(app.getHttpServer())
