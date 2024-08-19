@@ -1,7 +1,6 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import axios, { AxiosResponse } from 'axios';
-//import { ConfigService } from '@nestjs/config';
 import { FetchMovieDetails } from './type/fetch-movie-details.type';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie.dto';
@@ -14,7 +13,7 @@ import { Movie } from './entities/movie.entity';
 export class MovieService {
   constructor(
     @InjectModel('Movie') private movieModel: Model<Movie>, 
-    //private readonly configService: ConfigService
+    
   ) {}
   
   async createMovie(createMovieDto: CreateMovieDto): Promise<Movie> {
@@ -28,7 +27,7 @@ export class MovieService {
  
 
   async fetchAndSaveMovies() {
-   // const apiKey = this.configService.get<string>('API_KEY');
+   
   
     const url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}`;
   
@@ -60,7 +59,7 @@ export class MovieService {
   
 
   async fetchMovieDetails(movieId: number): Promise<FetchMovieDetails> {
-   // const apiUrl = this.configService.get<string>('API_URL');  // Adjust config key
+  
     const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`;
     
     const response: AxiosResponse = await axios.get(url);

@@ -61,7 +61,6 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get(`/movie/${emptyId}`)
       .expect(404)
-     // .expect()
   });
   it('should create a new movie', () => {
     return request(app.getHttpServer())

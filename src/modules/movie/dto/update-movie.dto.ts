@@ -1,4 +1,3 @@
-// update-movie.dto.ts
 import { IsString, IsNumber, IsArray, IsOptional } from 'class-validator';
 
 export class UpdateMovieDto {

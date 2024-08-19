@@ -1,4 +1,3 @@
-// create-movie.dto.ts
 import { IsString, IsNumber, IsArray, IsNotEmpty } from 'class-validator';
 
 export class CreateMovieDto {
